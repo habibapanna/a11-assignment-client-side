@@ -4,13 +4,14 @@ import {
 import MainLayout from "../Layout/MainLayout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
+import Login from "../pages/Login/Login";
 
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout></MainLayout>,
-      errorElement: <h2>Route not found</h2>,
+      errorElement: <h2>Page not found</h2>,
       children: [
         {
             path: "/",
@@ -19,6 +20,10 @@ import Register from "../pages/Register/Register";
         {
             path: "/register",
             element: <Register></Register>,
+        },
+        {
+            path: "/login",
+            element: <Login></Login>,
         },
       ]
     },

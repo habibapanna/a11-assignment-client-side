@@ -3,6 +3,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateProfile } from "firebase/auth"; // Import updateProfile
 import AuthContext from "../../context/AuthContext/AuthContext";
+import lottieRegister from '../../assets/lottie/register.json'
+import Lottie from "react-lottie";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -48,15 +50,27 @@ const Register = () => {
     }
   };
 
+   // Configure Lottie animation options
+   const lottieOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: lottieRegister,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <div>
-      <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col">
+      <div className="hero bg-lime-200 min-h-screen">
+        <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Register now!</h1>
+            {/* Lottie animation */}
+            <Lottie options={lottieOptions} height={300} width={300} />
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleRegister} className="card-body">
+            <h1 className="text-center font-bold text-3xl text-orange-500">Register Now!</h1>
               {/* Name Field */}
               <div className="form-control">
                 <label className="label">
@@ -120,7 +134,7 @@ const Register = () => {
 
               {/* Register Button */}
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn bg-orange-500">
                   Register
                 </button>
               </div>

@@ -44,7 +44,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="font-bold btn btn-ghost text-xl">
+          <a className="text-lime-500 font-bold btn btn-ghost text-xl">
             <img className="w-10" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
             Blog
           </a>
@@ -57,7 +57,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <button onClick={handleLogout} className="btn">Logout</button>
+              <button onClick={handleLogout} className="btn bg-orange-500">Logout</button>
             </>
           ) : (
             <>

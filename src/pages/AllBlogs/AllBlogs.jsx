@@ -35,7 +35,7 @@ const AllBlogsPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-bold text-center mb-6">All Blogs</h2>
+      <h2 className="text-2xl text-orange-500 font-bold text-center mb-6">All Blogs</h2>
 
       {/* Search and Category Filters */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -77,13 +77,13 @@ const AllBlogsPage = () => {
             <div className="mt-4 flex gap-2">
               <button
                 onClick={() => handleAddToWishlist(blog)}
-                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600"
               >
                 Add to Wishlist
               </button>
               <button
                 onClick={() => alert(`Navigate to Blog Details of ID: ${blog._id}`)}
-                className="flex-1 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+                className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
               >
                 Details
               </button>

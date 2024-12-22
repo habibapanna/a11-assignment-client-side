@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Typewriter } from "react-simple-typewriter";
 
 const AddBlogPage = () => {
@@ -29,34 +29,46 @@ const AddBlogPage = () => {
       category,
       shortDescription,
       longDescription,
-    
     };
-    console.log(newBlog);
-    fetch('http://localhost:5000/newBlogs', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(newBlog)
-    })
-    .then(res => res.json())
-    .then(data =>{
-      console.log(data);
-    })
-    
+
+    try {
+      const response = await fetch('http://localhost:5000/newBlogs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newBlog),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showSuccess('Blog submitted successfully!');
+        // Optionally reset form fields
+        setTitle('');
+        setImageUrl('');
+        setCategory('');
+        setShortDescription('');
+        setLongDescription('');
+      } else {
+        showError(data.message || 'Failed to submit the blog.');
+      }
+    } catch (error) {
+      showError('An error occurred while submitting the blog.');
+    }
   };
 
   return (
     <div className="container mx-auto p-6">
       <h2 className='text-center font-bold text-3xl text-lime-500'>
-      <Typewriter
-            words={['Add a New Blog']}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={70}
-            deleteSpeed={50}
-          />
+        <Typewriter
+          words={['Add a New Blog']}
+          loop={false}
+          cursor
+          cursorStyle="_"
+          typeSpeed={70}
+          deleteSpeed={50}
+        />
       </h2>
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
         <div className="mb-4">
@@ -96,7 +108,6 @@ const AddBlogPage = () => {
             <option value="Lifestyle">Lifestyle</option>
             <option value="Health">Health</option>
             <option value="Business">Business</option>
-            {/* Add more categories as needed */}
           </select>
         </div>
 
@@ -124,7 +135,7 @@ const AddBlogPage = () => {
 
         <button
           type="submit"
-          className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full py-3 bg-lime-500 text-white text-lg font-semibold rounded-lg hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           Submit
         </button>

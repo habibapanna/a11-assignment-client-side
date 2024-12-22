@@ -51,13 +51,13 @@ const RecentBlogs = () => {
                             <div className="flex justify-between items-center">
                                 <button
                                     onClick={() => handleViewDetails(blog)}
-                                    className="bg-orange-600 hover:bg-orange-400 text-white py-2 px-4 rounded transition duration-200"
+                                    className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded transition duration-200"
                                 >
                                     Details
                                 </button>
                                 <button
                                     onClick={() => handleAddToWishlist(blog)}
-                                    className="bg-lime-600 hover:bg-lime-400 text-white py-2 px-4 rounded transition duration-200"
+                                    className="bg-lime-500 hover:bg-lime-600 text-white py-2 px-4 rounded transition duration-200"
                                 >
                                     Add to Wishlist
                                 </button>

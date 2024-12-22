@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import RecentBlogs from "./RecentBlogs";
 import banner from '../../assets/banner/banner.jpg'
 import { Typewriter } from "react-simple-typewriter";
-import Marquee from "react-fast-marquee";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -55,11 +54,11 @@ const Home = () => {
 
       {/* Newsletter Section */}
       <section className="p-8 bg-white">
-      <Marquee>
+      
       <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
     Subscribe to Our Newsletter
   </h2>
-        </Marquee>
+        
         <form onSubmit={handleNewsletter} className="max-w-md mx-auto text-center">
           <input
             type="email"

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const RecentBlogs = () => {
     const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate(); // Initialize useNavigate hook
 
     useEffect(() => {
         fetch('http://localhost:5000/blogs')
@@ -17,23 +19,48 @@ const RecentBlogs = () => {
     const handleViewDetails = (blog) => {
         console.log("Viewing details for:", blog.title);
         // Add routing or modal logic here
+        // You can use navigate here if you have a blog details page
+        navigate(`/blog-details/${blog._id}`);
     };
 
-    const handleAddToWishlist = (blog) => {
+    const handleAddToWishlist = async (blog) => {
         console.log("Added to wishlist:", blog.title);
-        // Add wishlist functionality here
+        try {
+            // Send the blog data to the backend (assuming userId is required)
+            const response = await fetch('http://localhost:5000/wishList', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...blog,
+                    userId: "123", // Example user ID; replace with dynamic ID if needed
+                }),
+            });
+            const data = await response.json();
+            if (data.insertedId) {
+                console.log("Blog added to wishlist!");
+                navigate('/wishlist'); // Navigate to wishlist page
+            } else {
+                console.error("Failed to add to wishlist");
+            }
+        } catch (error) {
+            console.error("Error adding to wishlist:", error);
+        }
     };
 
     return (
         <div className="p-6">
-            <h2 className="text-3xl font-bold mb-6 text-center text-lime-500"> <Typewriter
-            words={['Recent Blogs']}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={70}
-            deleteSpeed={50}
-          /></h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-lime-500">
+                <Typewriter
+                    words={['Recent Blogs']}
+                    loop={false}
+                    cursor
+                    cursorStyle="_"
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                />
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogs.map((blog) => (
                     <div key={blog._id} className="p-4 bg-lime-100 shadow-lg rounded-lg transform transition duration-300 hover:shadow-xl hover:scale-105 hover:translate-z-10">
@@ -62,7 +89,6 @@ const RecentBlogs = () => {
                                     Add to Wishlist
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 ))}

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AllBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
+  const navigate = useNavigate();
 
   // Fetch blogs from the backend
   useEffect(() => {
@@ -21,10 +23,27 @@ const AllBlogsPage = () => {
   }, []);
 
   // Handle adding to wishlist
-  const handleAddToWishlist = (blog) => {
-    toast.success(`${blog.title} added to wishlist!`);
-    // Implement wishlist logic (e.g., send to backend)
+  const handleAddToWishlist = async (blog) => {
+    console.log("Sending to backend:", blog);
+    try {
+      const response = await axios.post("http://localhost:5000/wishList", {
+        ...blog,
+        userId: "123", // Example: Add user ID for associating wishlist items (replace with dynamic user ID if needed)
+      });
+      console.log("Response from backend:", response.data);
+      if (response.data.insertedId) {
+        toast.success(`${blog.title} added to wishlist!`);
+        navigate("/wishlist");
+      } else {
+        toast.error("Failed to add to wishlist.");
+      }
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
+      toast.error("Error adding to wishlist.");
+    }
   };
+  
+
 
   // Filtered blogs based on search and category
   const filteredBlogs = blogs.filter(

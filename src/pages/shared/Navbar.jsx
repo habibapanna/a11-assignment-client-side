@@ -45,7 +45,7 @@ const Navbar = () => {
             </ul>
           </div>
           <a className="text-lime-500 font-bold btn btn-ghost text-xl">
-            <img className="w-10" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
+            <img className="w-12" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
             Blog
           </a>
         </div>
@@ -61,7 +61,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link className="hover:underline text-lime-500" to="/register">Register</Link>
+              <Link className="hover:underline text-orange-500" to="/register">Register</Link>
               <Link className="btn bg-lime-500 ml-5" to="/login">Login</Link>
             </>
           )}

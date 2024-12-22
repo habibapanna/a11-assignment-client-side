@@ -5,9 +5,11 @@ import { updateProfile } from "firebase/auth"; // Import updateProfile
 import AuthContext from "../../context/AuthContext/AuthContext";
 import lottieRegister from '../../assets/lottie/register.json'
 import Lottie from "react-lottie";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -15,7 +17,6 @@ const Register = () => {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value.trim();
-    const photo = form.photo.value.trim();
 
     // Validate inputs
     if (!name) {
@@ -40,11 +41,11 @@ const Register = () => {
       // Update the user's profile
       await updateProfile(user, {
         displayName: name,
-        photoURL: photo,
       });
 
       toast.success("Registration successful!");
       form.reset(); // Reset the form after successful registration
+      navigate("/");
     } catch (error) {
       toast.error(`Registration failed: ${error.message}`);
     }
@@ -94,20 +95,6 @@ const Register = () => {
                   type="email"
                   placeholder="Enter your email"
                   name="email"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-
-              {/* Photo URL Field */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter photo URL"
-                  name="photo"
                   className="input input-bordered"
                   required
                 />

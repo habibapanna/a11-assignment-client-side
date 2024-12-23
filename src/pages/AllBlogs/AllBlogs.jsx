@@ -54,7 +54,7 @@ const AllBlogsPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-2xl text-orange-500 font-bold text-center mb-6">All Blogs</h2>
+      <h2 className="text-3xl text-orange-500 font-bold text-center mb-6">All Blogs</h2>
 
       {/* Search and Category Filters */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">

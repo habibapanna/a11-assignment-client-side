@@ -63,7 +63,7 @@ const RecentBlogs = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogs.map((blog) => (
-                    <div key={blog._id} className="p-4 bg-lime-100 shadow-lg rounded-lg transform transition duration-300 hover:shadow-xl hover:scale-105 hover:translate-z-10">
+                    <div key={blog._id} className="p-4 bg-white shadow-lg rounded-lg transform transition duration-300 hover:shadow-xl hover:scale-105 hover:translate-z-10">
                         <img
                             src={blog.image}
                             alt={blog.title}

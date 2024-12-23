@@ -1,8 +1,22 @@
-# React + Vite
+# Blog Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack blog website that allows users to browse, add to their wishlist, and view detailed blogs. The project is built using Node.js (Express), MongoDB, React.js, and integrates features like authentication and dynamic content loading.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Blog Management**: Browse blogs by categories and search by title.
+- **Wishlist**: Add and remove blogs from the wishlist for a specific user.
+- **Blog Details**: View detailed information about a specific blog.
+- **Backend**: Built with Node.js and MongoDB for data storage.
+- **Frontend**: Built with React.js, managing dynamic content, state, and user interaction.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+1. **Node.js**: Ensure that you have Node.js installed. You can check by running:
+
+   ```bash
+   node -v

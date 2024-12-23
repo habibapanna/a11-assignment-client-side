@@ -42,7 +42,7 @@ const Home = () => {
         <div className="mb-6">
           <Lottie options={lottieOptions}  />
         </div>
-        <h1 className="text-4xl font-semibold text-lime-500">Welcome to the Blog</h1>
+        <h1 className="text-4xl font-semibold text-lime-300">Welcome to the Blog</h1>
         <p>Your source for the latest blog posts</p>
       </header>
 

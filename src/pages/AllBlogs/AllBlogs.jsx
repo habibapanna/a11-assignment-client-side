@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // Import Framer Motion
+import AuthContext from "../../context/AuthContext/AuthContext"; // Import AuthContext
 
 const AllBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
+  const { userId, loading } = useContext(AuthContext); // Get userId from AuthContext
 
   // Fetch blogs from the backend
   useEffect(() => {
@@ -24,13 +27,16 @@ const AllBlogsPage = () => {
 
   // Handle adding to wishlist
   const handleAddToWishlist = async (blog) => {
-    console.log("Sending to backend:", blog);
+    if (!userId) {
+      toast.error("Please log in to add to wishlist.");
+      return; // Prevent adding to wishlist if user is not logged in
+    }
+
     try {
       const response = await axios.post("http://localhost:5000/wishList", {
         ...blog,
-        userId: "123", // Example: Add user ID for associating wishlist items (replace with dynamic user ID if needed)
+        userId, // Use the dynamic userId from AuthContext
       });
-      console.log("Response from backend:", response.data);
       if (response.data.insertedId) {
         toast.success(`${blog.title} added to wishlist!`);
         navigate("/wishlist");
@@ -42,8 +48,6 @@ const AllBlogsPage = () => {
       toast.error("Error adding to wishlist.");
     }
   };
-  
-
 
   // Filtered blogs based on search and category
   const filteredBlogs = blogs.filter(
@@ -51,6 +55,10 @@ const AllBlogsPage = () => {
       blog.title.toLowerCase().includes(search.toLowerCase()) &&
       (category === "" || blog.category === category)
   );
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading state while user data is being fetched
+  }
 
   return (
     <div className="container mx-auto p-6">
@@ -80,10 +88,13 @@ const AllBlogsPage = () => {
 
       {/* Blog Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredBlogs.map((blog) => (
-          <div
+        {filteredBlogs.map((blog, index) => (
+          <motion.div
             key={blog._id}
             className="border rounded-md p-4 shadow-md flex flex-col justify-between"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <img
               src={blog.imageUrl}
@@ -101,13 +112,14 @@ const AllBlogsPage = () => {
                 Add to Wishlist
               </button>
               <button
-                onClick={() => alert(`Navigate to Blog Details of ID: ${blog._id}`)}
-                className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
-              >
-                Details
-              </button>
+  onClick={() => navigate(`/blog-details/${blog._id}`)} // Pass the blog ID to the route
+  className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
+>
+  Details
+</button>
+
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 

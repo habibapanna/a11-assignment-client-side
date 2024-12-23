@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateProfile } from "firebase/auth"; // Import updateProfile
 import AuthContext from "../../context/AuthContext/AuthContext";
-import lottieRegister from '../../assets/lottie/register.json'
+import lottieRegister from '../../assets/lottie/register.json';
 import Lottie from "react-lottie";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const Register = () => {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value.trim();
+    const photoURL = form.photoURL.value.trim();
 
     // Validate inputs
     if (!name) {
@@ -29,8 +30,14 @@ const Register = () => {
       return;
     }
 
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
+    const passwordErrors = [];
+    if (password.length < 6) passwordErrors.push("at least 6 characters");
+    if (!/[A-Z]/.test(password)) passwordErrors.push("a capital letter");
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) passwordErrors.push("a special character");
+    if (!/\d/.test(password)) passwordErrors.push("a numeric character");
+
+    if (passwordErrors.length > 0) {
+      toast.error(`Password must include ${passwordErrors.join(", ")}.`);
       return;
     }
 
@@ -41,6 +48,7 @@ const Register = () => {
       // Update the user's profile
       await updateProfile(user, {
         displayName: name,
+        photoURL: photoURL || "", // Set the photo URL if provided
       });
 
       toast.success("Registration successful!");
@@ -51,8 +59,8 @@ const Register = () => {
     }
   };
 
-   // Configure Lottie animation options
-   const lottieOptions = {
+  // Configure Lottie animation options
+  const lottieOptions = {
     loop: true,
     autoplay: true,
     animationData: lottieRegister,
@@ -71,7 +79,7 @@ const Register = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleRegister} className="card-body">
-            <h1 className="text-center font-bold text-3xl text-orange-500">Register Now!</h1>
+              <h1 className="text-center font-bold text-3xl text-orange-500">Register Now!</h1>
               {/* Name Field */}
               <div className="form-control">
                 <label className="label">
@@ -97,6 +105,19 @@ const Register = () => {
                   name="email"
                   className="input input-bordered"
                   required
+                />
+              </div>
+
+              {/* Photo URL Field */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="url"
+                  placeholder="Enter your photo URL"
+                  name="photoURL"
+                  className="input input-bordered"
                 />
               </div>
 

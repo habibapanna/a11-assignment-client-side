@@ -60,7 +60,7 @@ const AddBlogPage = () => {
 
   return (
     <div className="container mx-auto p-6 bg-orange-500">
-      <h2 className='text-center font-bold text-3xl text-lime-500'>
+      <h2 className='text-center font-bold text-3xl text-lime-300'>
         <Typewriter
           words={['Add a New Blog']}
           loop={false}
@@ -70,7 +70,7 @@ const AddBlogPage = () => {
           deleteSpeed={50}
         />
       </h2>
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg mt-5">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-2xl mt-5">
         <div className="mb-4">
           <label htmlFor="title" className="block text-lg font-semibold text-gray-700">Title</label>
           <input

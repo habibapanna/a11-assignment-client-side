@@ -54,9 +54,17 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex items-center gap-4">
           {user ? (
             <>
+              <div className="flex items-center gap-2">
+                <img
+                  src={user.photoURL || "https://via.placeholder.com/40"}
+                  alt="User Profile"
+                  className="w-10 h-10 rounded-full"
+                />
+                <span className="font-semibold text-gray-700">{user.displayName || "User"}</span>
+              </div>
               <button onClick={handleLogout} className="btn bg-orange-500">Logout</button>
             </>
           ) : (

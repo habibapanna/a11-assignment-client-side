@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component"; // Import the data table component
+import Skeleton from "react-loading-skeleton"; // Import Skeleton component
 
 const FeaturedBlogsPage = () => {
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
@@ -21,10 +22,6 @@ const FeaturedBlogsPage = () => {
 
     fetchFeaturedBlogs();
   }, []);
-
-  if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
-  }
 
   const columns = [
     {
@@ -50,6 +47,24 @@ const FeaturedBlogsPage = () => {
       right: true, // Align to the right
     },
   ];
+
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6">
+        <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
+          Featured Blogs
+        </h2>
+        {/* Display Skeleton loaders for the data table */}
+        <div className="mb-4">
+          <Skeleton height={40} width="60%" className="mb-2" />
+          <Skeleton height={40} width="90%" className="mb-2" />
+          <Skeleton height={40} width="80%" className="mb-2" />
+          <Skeleton height={40} width="70%" className="mb-2" />
+        </div>
+        <Skeleton count={5} height={50} />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-6">

@@ -59,8 +59,8 @@ const AddBlogPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-orange-500">
-      <h2 className='text-center font-bold text-3xl text-lime-300'>
+    <div className="container mx-auto p-6">
+      <h2 className='text-center font-bold text-3xl text-orange-500'>
         <Typewriter
           words={['Add a New Blog']}
           loop={false}

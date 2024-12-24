@@ -112,12 +112,11 @@ const AllBlogsPage = () => {
                 Add to Wishlist
               </button>
               <button
-  onClick={() => navigate(`/blog-details/${blog._id}`)} // Pass the blog ID to the route
-  className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
->
-  Details
-</button>
-
+                onClick={() => navigate(`/blog-details/${blog._id}`)} // Pass the blog ID to the route
+                className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
+              >
+                Details
+              </button>
             </div>
           </motion.div>
         ))}

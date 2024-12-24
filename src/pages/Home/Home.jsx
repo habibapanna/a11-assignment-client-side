@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Lottie from "react-lottie";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import welcomeLottieData from "../../assets/lottie/welcome.json";
 import { toast } from "react-toastify";
 import RecentBlogs from "./RecentBlogs";
-import banner from '../../assets/banner/banner.jpg';
+import banner from "../../assets/banner/banner.jpg";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 
@@ -14,18 +16,31 @@ const trendingTopics = [
   { title: "Travel Adventures", icon: "✈️" },
   { title: "Food & Recipes", icon: "🍔" },
   { title: "Lifestyle", icon: "🌿" },
-  { title: "Finance", icon: "💸" }
+  { title: "Finance", icon: "💸" },
 ];
 
 // Updated author data with provided images
 const authors = [
   { name: "John Doe", photo: "https://i.ibb.co.com/vDMWj8b/business-man-by-skyscraper.jpg", description: "Tech Enthusiast and Blogger" },
   { name: "Jane Smith", photo: "https://i.ibb.co.com/PtMCRj6/young-adult-enjoying-virtual-date.jpg", description: "Health & Wellness Expert" },
-  { name: "Alice Johnson", photo: "https://i.ibb.co.com/X7nX7qD/horizontal-portrait-smiling-happy-young-pleasant-looking-female-wears-denim-shirt-stylish-glasses-wi.jpg", description: "Travel Blogger" }
+  { name: "Alice Johnson", photo: "https://i.ibb.co.com/X7nX7qD/horizontal-portrait-smiling-happy-young-pleasant-looking-female-wears-denim-shirt-stylish-glasses-wi.jpg", description: "Travel Blogger" },
 ];
 
 const Home = () => {
   const [email, setEmail] = useState("");
+  const [loadingBlogs, setLoadingBlogs] = useState(true); // Simulate loading for RecentBlogs
+  const [loadingTrending, setLoadingTrending] = useState(true); // Simulate loading for Trending Topics
+  const [loadingAuthors, setLoadingAuthors] = useState(true); // Simulate loading for Authors
+
+  // Simulate data fetching
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingBlogs(false);
+      setLoadingTrending(false);
+      setLoadingAuthors(false);
+    }, 2000); // Simulate 2-second fetch
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle newsletter subscription
   const handleNewsletter = (e) => {
@@ -52,7 +67,6 @@ const Home = () => {
     <div className="min-h-screen bg-orange-300">
       {/* Animated Welcome Header */}
       <header className="bg-cover bg-center text-white p-8 text-center" style={{ backgroundImage: `url(${banner})` }}>
-        {/* Lottie animation */}
         <div className="mb-6">
           <Lottie options={lottieOptions} />
         </div>
@@ -62,7 +76,11 @@ const Home = () => {
 
       {/* Recent Blog Posts Section */}
       <section className="mx-auto">
-        <RecentBlogs />
+        {loadingBlogs ? (
+          <Skeleton height={150} count={3} className="mb-4" />
+        ) : (
+          <RecentBlogs />
+        )}
       </section>
 
       {/* Newsletter Section */}
@@ -85,14 +103,7 @@ const Home = () => {
       {/* Tips Section */}
       <section className="p-8 bg-lime-300">
         <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
-          <Typewriter
-            words={['Tips to Enhance Your Experience']}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={70}
-            deleteSpeed={50}
-          />
+          <Typewriter words={["Tips to Enhance Your Experience"]} loop={false} cursor cursorStyle="_" typeSpeed={70} deleteSpeed={50} />
         </h2>
         <ul className="list-disc pl-10">
           <li>Engage with the community by commenting on your favorite blogs.</li>
@@ -101,53 +112,47 @@ const Home = () => {
         </ul>
       </section>
 
-      {/* Trending Topics Section (New) */}
+      {/* Trending Topics Section */}
       <section className="p-8 bg-gradient-to-r from-orange-400 to-lime-300">
         <h2 className="text-3xl font-bold text-center mb-6 text-white">Trending Topics</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          {trendingTopics.map((topic, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-              <div className="text-4xl">{topic.icon}</div>
-              <h3 className="text-lg font-semibold mt-2">{topic.title}</h3>
-            </div>
-          ))}
-        </div>
+        {loadingTrending ? (
+          <Skeleton height={100} count={2} className="mb-4" />
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+            {trendingTopics.map((topic, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <div className="text-4xl">{topic.icon}</div>
+                <h3 className="text-lg font-semibold mt-2">{topic.title}</h3>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
-      {/* Author Spotlight Section (New) */}
+      {/* Author Spotlight Section */}
       <section className="p-8 bg-white">
         <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">Meet Our Authors</h2>
-        <div className="relative overflow-hidden">
-          {/* Wave-like animation of author images */}
+        {loadingAuthors ? (
+          <Skeleton circle height={80} width={80} count={3} className="mb-4" />
+        ) : (
           <motion.div
             className="flex flex-wrap justify-center space-x-6 space-y-6 lg:space-y-0 lg:space-x-6"
-            animate={{
-              y: [0, 20, 0, -20, 0], // Creates an up-and-down wave movement
-            }}
+            animate={{ y: [0, 20, 0, -20, 0] }}
             transition={{
-              y: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 3, // Controls speed of the wave (3 seconds for one full cycle)
-                ease: "easeInOut",
-              },
+              y: { repeat: Infinity, repeatType: "loop", duration: 3, ease: "easeInOut" },
             }}
           >
             {authors.map((author, index) => (
               <div key={index} className="w-60 text-center py-10">
                 <div className="h-60 w-60 bg-gray-300 rounded-full overflow-hidden mx-auto">
-                  <motion.img
-                    src={author.photo}
-                    alt={author.name}
-                    className="h-full w-full object-cover"
-                  />
+                  <motion.img src={author.photo} alt={author.name} className="h-full w-full object-cover" />
                 </div>
                 <h3 className="text-xl font-semibold mt-3">{author.name}</h3>
                 <p>{author.description}</p>
               </div>
             ))}
           </motion.div>
-        </div>
+        )}
       </section>
     </div>
   );

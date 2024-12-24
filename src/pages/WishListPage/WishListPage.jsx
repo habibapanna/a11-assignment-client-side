@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { useSpring, animated } from "@react-spring/web"; // Import for animations
 
 const WishListPage = () => {
-  const loaderWishList = useLoaderData();
-  const [wishList, setWishList] = useState(loaderWishList);
+  const [wishList, setWishList] = useState([]);
   const { userId, loading } = useContext(AuthContext); // Get userId from AuthContext
   const navigate = useNavigate();
 
@@ -19,6 +18,7 @@ const WishListPage = () => {
 
     const fetchWishList = async () => {
       try {
+        // Fetch wishlist items for the logged-in user
         const response = await axios.get(`http://localhost:5000/wishList/${userId}`);
         setWishList(response.data); // Set fetched wishlist items
       } catch (error) {
@@ -32,27 +32,24 @@ const WishListPage = () => {
     }
   }, [userId, navigate]);
 
-  
+  // Remove item from wishlist
   const handleRemoveFromWishlist = (id) => {
     fetch(`http://localhost:5000/wishList/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
-      .then((res) => res.json()) // Parse the response as JSON
+      .then((res) => res.json())
       .then((data) => {
-        console.log('delete is done', data);
+        console.log("delete is done", data);
         toast.success("Item removed from your wishlist!"); // Show success toast
+        // Remove the item from the state (wishlist)
+        const remainingWishList = wishList.filter((blog) => blog._id !== id);
+        setWishList(remainingWishList);
       })
       .catch((error) => {
-        console.error('Error removing from wishlist:', error);
+        console.error("Error removing from wishlist:", error);
         toast.error("Error removing item from wishlist."); // Show error toast if there's an issue
       });
-  
-    // Remove the item from the state (wishlist)
-    const remainingWishList = wishList.filter((blog) => blog._id !== id);
-    setWishList(remainingWishList);
   };
-  
-
 
   if (loading) {
     return <div>Loading...</div>; // Show loading state while user data is being fetched
@@ -63,7 +60,7 @@ const WishListPage = () => {
     opacity: 1,
     transform: "scale(1)",
     from: { opacity: 0, transform: "scale(0.8)" },
-    config: { tension: 200, friction: 20 }
+    config: { tension: 200, friction: 20 },
   });
 
   return (
@@ -76,9 +73,13 @@ const WishListPage = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {wishList.map((blog) => (
-            <animated.div key={blog._id} style={springProps} className="border rounded-md p-4 shadow-md flex flex-col justify-between">
+            <animated.div
+              key={blog._id}
+              style={springProps}
+              className="border rounded-md p-4 shadow-md flex flex-col justify-between"
+            >
               <img
-                src={blog.image || 'https://i.ibb.co/xq08rZT/access-connection-internet-technology-concept.jpg'} // Fallback image if blog image is missing
+                src={blog.image || "https://i.ibb.co/xq08rZT/access-connection-internet-technology-concept.jpg"} // Fallback image if blog image is missing
                 alt={blog.title}
                 className="w-full h-40 object-cover rounded-md mb-4"
               />
@@ -88,11 +89,11 @@ const WishListPage = () => {
               <div className="mt-4 flex gap-2">
                 {/* Remove from Wishlist Button */}
                 <button
-  onClick={() => handleRemoveFromWishlist(blog._id)} // Pass blog._id here
-  className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600"
->
-  Remove from Wishlist
-</button>
+                  onClick={() => handleRemoveFromWishlist(blog._id)} // Pass blog._id here
+                  className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600"
+                >
+                  Remove from Wishlist
+                </button>
                 {/* View Details Button */}
                 <button
                   onClick={() => navigate(`/blog-details/${blog._id}`)}

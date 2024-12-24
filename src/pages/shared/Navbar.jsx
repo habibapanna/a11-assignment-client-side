@@ -57,11 +57,11 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-lime-500 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {links}
             </ul>
           </div>
-          <a className="text-lime-500 font-bold btn btn-ghost text-2xl">
+          <a className="text-lime-300 font-bold btn btn-ghost text-2xl">
             <img className="w-12 rounded-full" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
             Blogger
           </a>

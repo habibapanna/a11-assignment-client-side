@@ -7,7 +7,7 @@ Welcome to the **Blog Website Development Project**! This is a fully responsive 
 This project is aimed at creating a next-generation blog website where users can explore, write, and manage blogs effortlessly. The platform is designed to be user-friendly, visually appealing, and optimized for all devices. It's an excellent demonstration of front-end and back-end integration, authentication, and dynamic content management.
 
 ## Live Site
-[Live Site URL](#) (Add your deployed site link here)
+Live Site URL(#)(https://blog-website-7c3f1.web.app)
 
 ## Features
 
@@ -114,12 +114,5 @@ This project is aimed at creating a next-generation blog website where users can
 ## Commit Guidelines
 - **Client:** At least 15 meaningful commits with descriptive messages.
 - **Server:** At least 8 meaningful commits with descriptive messages.
-
-## Submission Checklist
-- Live Site Link: [Live Site URL](#)
-- GitHub Repository (Client): [Client Repo URL](#)
-- GitHub Repository (Server): [Server Repo URL](#)
-
----
 
 Thank you for your interest in this project. We look forward to seeing your creative implementation!

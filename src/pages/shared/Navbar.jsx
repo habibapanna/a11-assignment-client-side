@@ -44,9 +44,9 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="text-lime-500 font-bold btn btn-ghost text-xl">
+          <a className="text-lime-500  font-bold btn btn-ghost text-2xl">
             <img className="w-12" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
-            Blog
+            Blogger
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

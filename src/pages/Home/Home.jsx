@@ -120,7 +120,7 @@ const Home = () => {
         <div className="relative overflow-hidden">
           {/* Wave-like animation of author images */}
           <motion.div
-            className="flex space-x-6 justify-center"
+            className="flex flex-wrap justify-center space-x-6 space-y-6 lg:space-y-0 lg:space-x-6"
             animate={{
               y: [0, 20, 0, -20, 0], // Creates an up-and-down wave movement
             }}

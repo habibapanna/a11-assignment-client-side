@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DataTable from "react-data-table-component"; // Import the data table component
 
 const FeaturedBlogsPage = () => {
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
@@ -25,36 +26,47 @@ const FeaturedBlogsPage = () => {
     return <div className="text-center mt-10">Loading...</div>;
   }
 
+  const columns = [
+    {
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: true, // Allow sorting
+      width: "60px", // Set column width
+    },
+    {
+      name: "Title",
+      selector: (row) => row.title,
+      sortable: true, // Allow sorting
+    },
+    {
+      name: "Category",
+      selector: (row) => row.category,
+      sortable: true, // Allow sorting
+    },
+    {
+      name: "Word Count",
+      selector: (row) => row.wordCount,
+      sortable: true, // Allow sorting
+      right: true, // Align to the right
+    },
+  ];
+
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
         Featured Blogs
       </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-4 py-2">#</th>
-              <th className="border border-gray-300 px-4 py-2">Title</th>
-              <th className="border border-gray-300 px-4 py-2">Category</th>
-              <th className="border border-gray-300 px-4 py-2">Author</th>
-              <th className="border border-gray-300 px-4 py-2">Word Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {featuredBlogs.map((blog, index) => (
-              <tr key={blog._id} className="hover:bg-gray-50">
-                <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
-                <td className="border border-gray-300 px-4 py-2">{blog.title}</td>
-                <td className="border border-gray-300 px-4 py-2">{blog.category}</td>
-                <td className="border border-gray-300 px-4 py-2">{blog.userName}</td>
-                <td className="border border-gray-300 px-4 py-2 text-center">{blog.wordCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DataTable
+        columns={columns}
+        data={featuredBlogs}
+        pagination // Enable pagination
+        highlightOnHover // Highlight rows on hover
+        dense // Make rows more compact
+        noHeader // Optional, to remove the header row
+        defaultSortField="title" // Default sort field
+        defaultSortAsc={true} // Default sort order
+      />
     </div>
   );
 };

@@ -16,7 +16,7 @@ const AllBlogsPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/newBlogs");
+        const response = await axios.get("https://blog-website-server-hazel.vercel.app/newBlogs");
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -33,7 +33,7 @@ const AllBlogsPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/wishList", {
+      const response = await axios.post("https://blog-website-server-hazel.vercel.app/wishList", {
         ...blog,
         userId, // Use the dynamic userId from AuthContext
       });

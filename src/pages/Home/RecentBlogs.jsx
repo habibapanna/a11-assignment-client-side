@@ -10,7 +10,7 @@ const RecentBlogs = () => {
 
   useEffect(() => {
     // Fetch the latest blogs from the backend
-    fetch("http://localhost:5000/newBlogs")
+    fetch("https://blog-website-server-hazel.vercel.app/newBlogs")
       .then((res) => res.json())
       .then((data) => {
         // Assuming blogs have an `addedTime` field in ISO format
@@ -28,7 +28,7 @@ const RecentBlogs = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/wishList", {
+      const response = await fetch("https://blog-website-server-hazel.vercel.app/wishList", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

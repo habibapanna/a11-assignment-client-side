@@ -47,7 +47,7 @@ import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
         {
             path: "/wishlist",
             element: <PrivateRoute><WishListPage></WishListPage></PrivateRoute>,
-            loader: () => fetch('http://localhost:5000/wishList')
+            loader: () => fetch('https://blog-website-server-hazel.vercel.app/wishList')
         },
         {
             path: "/blog-details/:blogId",

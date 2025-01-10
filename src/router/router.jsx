@@ -47,11 +47,11 @@ import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
         {
             path: "/wishlist",
             element: <PrivateRoute><WishListPage></WishListPage></PrivateRoute>,
-            loader: () => fetch('https://blog-website-server-hazel.vercel.app/wishList')
+            loader: () => fetch('http://localhost:5000/wishList')
         },
         {
             path: "/blog-details/:blogId",
-            element: <BlogDetailsPage></BlogDetailsPage>,
+            element: <PrivateRoute><BlogDetailsPage></BlogDetailsPage></PrivateRoute>,
         },
         {
             path: "/update-blog/:blogId",
@@ -60,5 +60,5 @@ import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
       ]
     },
   ]);
-
+// https://blog-website-server-hazel.vercel.app/wishList
   export default router;

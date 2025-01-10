@@ -3,7 +3,7 @@ import Lottie from "react-lottie";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import welcomeLottieData from "../../assets/lottie/welcome.json";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import RecentBlogs from "./RecentBlogs";
 import banner from "../../assets/banner/banner.jpg";
 import { Typewriter } from "react-simple-typewriter";
@@ -64,15 +64,26 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-orange-300">
+    <div className="min-h-screen">
       {/* Animated Welcome Header */}
-      <header className="bg-cover bg-center text-white p-8 text-center" style={{ backgroundImage: `url(${banner})` }}>
-        <div className="mb-6">
-          <Lottie options={lottieOptions} />
-        </div>
-        <h1 className="text-4xl font-semibold text-lime-300">Welcome to the Blog</h1>
-        <p>Your source for the latest blog posts</p>
-      </header>
+      <header
+  className="relative bg-cover bg-center text-white p-8 text-center"
+  style={{ backgroundImage: `url(${banner})` }}
+>
+  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+  <div className="relative z-10">
+    <div className="mb-6">
+      <Lottie options={lottieOptions} />
+    </div>
+    <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-yellow-300 to-orange-500 drop-shadow-lg">
+  Welcome to the Blog
+</h1>
+<p className="mt-2 text-lg font-medium text-white drop-shadow-md">
+  Your source for the latest blog posts
+</p>
+
+  </div>
+</header>
 
       {/* Recent Blog Posts Section */}
       <section className="mx-auto">
@@ -83,9 +94,11 @@ const Home = () => {
         )}
       </section>
 
-      {/* Newsletter Section */}
-      <section className="p-8 bg-white">
-        <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">Subscribe to Our Newsletter</h2>
+     {/* Newsletter Section */}
+     <section className="p-8 bg-white">
+        <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
+          Subscribe to Our Newsletter
+        </h2>
         <form onSubmit={handleNewsletter} className="max-w-md mx-auto text-center">
           <input
             type="email"
@@ -94,11 +107,18 @@ const Home = () => {
             placeholder="Enter your email"
             className="p-3 border rounded-md w-full mb-4"
           />
-          <button type="submit" className="bg-lime-600 text-white px-6 py-2 rounded-md">
+          <button
+            type="submit"
+            className="bg-lime-600 text-white px-6 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:bg-lime-500"
+          >
             Subscribe
           </button>
         </form>
       </section>
+
+      {/* Toast Container */}
+      <ToastContainer></ToastContainer>
+
 
       {/* Tips Section */}
       <section className="p-8 bg-lime-300">

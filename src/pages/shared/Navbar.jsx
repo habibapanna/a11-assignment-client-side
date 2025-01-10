@@ -7,11 +7,11 @@ const Navbar = () => {
   const location = useLocation(); // Get current route location
 
   // Define navbar color based on the route
-  let navbarColor = 'bg-gradient-to-r from-blue-500 via-green-500 to-purple-500'; // Default mixed color (gradient)
+  let navbarColor = 'bg-orange-500'; // Default mixed color (gradient)
 
   // Optional: Define more specific colors based on routes, if needed
   if (location.pathname === '/') {
-    navbarColor = 'bg-black'; // Blue, Green, Purple Gradient for Home
+    navbarColor = 'bg-orange-500'; // Black for Home
   } else if (location.pathname === '/add-blog') {
     navbarColor = 'bg-gradient-to-r from-red-500 via-yellow-500 to-green-500'; // Green, Yellow, Red Gradient for Add Blog
   } else if (location.pathname === '/all-blogs') {
@@ -26,19 +26,19 @@ const Navbar = () => {
     <>
       <li><NavLink to="/">Home</NavLink></li>
       <li><NavLink to="/add-blog">Add Blog</NavLink></li>
-      <li><NavLink to="/all-blogs">All blogs</NavLink></li>
+      <li><NavLink to="/all-blogs">All Blogs</NavLink></li>
       <li><NavLink to="/featured-blogs">Featured Blogs</NavLink></li>
       <li><NavLink to="/wishlist">Wishlist</NavLink></li>
     </>
   );
 
   const handleLogout = () => {
-    logoutUser();  // Call the logout function
+    logoutUser(); // Call the logout function
   };
 
   return (
-    <div>
-      <div className={`navbar ${navbarColor} text-white`}>
+    <div className={`sticky top-0 z-50 ${navbarColor}`}>
+      <div className="navbar text-white container mx-auto px-4">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -82,7 +82,7 @@ const Navbar = () => {
                 />
                 <span className="font-semibold">{user.displayName || "User"}</span>
               </div>
-              <button onClick={handleLogout} className="btn bg-orange-500 text-white border-none">Logout</button>
+              <button onClick={handleLogout} className="btn border-none">Logout</button>
             </>
           ) : (
             <>

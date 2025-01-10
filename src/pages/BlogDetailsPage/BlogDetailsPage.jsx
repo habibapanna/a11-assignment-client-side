@@ -17,7 +17,7 @@ const BlogDetailsPage = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const blogResponse = await axios.get(`https://blog-website-server-hazel.vercel.app/blog-details/${blogId}`);
+        const blogResponse = await axios.get(`http://localhost:5000/blog-details/${blogId}`);
         setBlog(blogResponse.data);
 
         // Check if the current user is the blog owner
@@ -25,7 +25,7 @@ const BlogDetailsPage = () => {
           setIsOwner(true);
         }
 
-        const commentsResponse = await axios.get(`https://blog-website-server-hazel.vercel.app/comments`);
+        const commentsResponse = await axios.get(`http://localhost:5000/comments`);
         setComments(commentsResponse.data);
       } catch (error) {
         console.error("Error fetching blog details or comments:", error);
@@ -48,7 +48,7 @@ const BlogDetailsPage = () => {
     }
 
     try {
-      const response = await axios.post("https://blog-website-server-hazel.vercel.app/comments", {
+      const response = await axios.post("http://localhost:5000/comments", {
         blogId,
         userId,
         userName: userName, // Using the user's name from AuthContext
@@ -76,53 +76,60 @@ const BlogDetailsPage = () => {
   return (
     <div className="container mx-auto p-6">
       {/* Blog details */}
-      <div className="mb-6 w-full mx-auto  text-center">
-        <h2 className="text-3xl mt- font-bold text-orange-500">{blog.title}</h2>
-        <p className="mt-2 font-bold text-xl text-gray-600">{blog.category}</p>
-        <img src={blog.imageUrl} alt={blog.title} className="w-full h-auto object-contain rounded-md mt-4" />
-        <p className="mt-4">{blog.description}</p>
+      <div className="flex flex-wrap md:flex-nowrap items-start gap-6 mb-6">
+        {/* Left Column: Image */}
+        <div className="w-full md:w-1/2">
+          <img
+            src={blog.imageUrl}
+            alt={blog.title}
+            className="w-full h-auto object-contain rounded-md"
+          />
+        </div>
 
-        {/* Conditional Update Button for blog owner */}
-        {isOwner && (
-          <button
-            onClick={handleUpdateBlog}
-            className="bg-lime-500 text-white py-2 px-4 rounded-md mt-6"
-          >
-            Update Blog
-          </button>
-        )}
+        {/* Right Column: Title, Category, Description */}
+        <div className="w-full md:w-1/2">
+          <h2 className="text-3xl font-bold text-orange-500">{blog.title}</h2>
+          <p className="mt-2 font-bold text-xl text-gray-600">{blog.category}</p>
+          <p className="mt-4 text-gray-700">{blog.shortDescription}</p>
+          <p className="mt-4 text-gray-700">{blog.longDescription}</p>
+
+          {/* Conditional Update Button for blog owner */}
+          {isOwner && (
+            <button
+              onClick={handleUpdateBlog}
+              className="bg-orange-500 text-white py-2 px-4 rounded-md mt-6 w-full hover:bg-orange-600"
+            >
+              Update Blog
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Comments Section */}
       <div className="mt-6">
         <h3 className="text-2xl font-semibold text-gray-800">Comments</h3>
 
-        {/* Conditionally Render Comment Section */}
-        
-          <p className="text-red-500 mt-2">You cannot comment on your own blog.</p>
-        
-          <div className="flex items-center space-x-4">
-            <img
-              src={userProfilePicture || "default-profile-picture.jpg"}
-              alt={userName}
-              className="w-10 h-10 object-cover rounded-full"
-            />
-            <div className="w-full">
-              <textarea
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Add a comment..."
-                className="w-full p-2 border rounded-md mt-2"
-              ></textarea>
-              <button
-                onClick={handleAddComment}
-                className="bg-orange-500 text-white py-2 px-4 rounded-md mt-2 w-full"
-              >
-                Add Comment
-              </button>
-            </div>
+        <div className="flex items-center space-x-4 mt-4">
+          <img
+            src={userProfilePicture || "default-profile-picture.jpg"}
+            alt={userName}
+            className="w-10 h-10 object-cover rounded-full"
+          />
+          <div className="w-full">
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="w-full p-2 border rounded-md mt-2"
+            ></textarea>
+            <button
+              onClick={handleAddComment}
+              className="bg-orange-500 text-white py-2 px-4 rounded-md mt-2 w-full hover:bg-orange-600"
+            >
+              Add Comment
+            </button>
           </div>
-        
+        </div>
 
         {/* Display all comments */}
         <div className="mt-4">

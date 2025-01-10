@@ -15,11 +15,11 @@ const WishListPage = () => {
     if (!userId) {
       navigate("/login"); // Redirect to login if the user is not logged in
     }
-
+// https://blog-website-server-hazel.vercel.app/wishList/${userId}
     const fetchWishList = async () => {
       try {
         // Fetch wishlist items for the logged-in user
-        const response = await axios.get(`https://blog-website-server-hazel.vercel.app/wishList/${userId}`);
+        const response = await axios.get(`http://localhost:5000/wishList/${userId}`);
         setWishList(response.data); // Set fetched wishlist items
       } catch (error) {
         console.error("Error fetching wishlist:", error);
@@ -31,10 +31,10 @@ const WishListPage = () => {
       fetchWishList();
     }
   }, [userId, navigate]);
-
+// https://blog-website-server-hazel.vercel.app/wishList/${id}
   // Remove item from wishlist
   const handleRemoveFromWishlist = (id) => {
-    fetch(`https://blog-website-server-hazel.vercel.app/wishList/${id}`, {
+    fetch(`http://localhost:5000/wishList/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -64,7 +64,7 @@ const WishListPage = () => {
   });
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container min-h-screen mx-auto p-6">
       <h2 className="text-3xl text-orange-500 font-bold text-center mb-6">Your Wishlist</h2>
 
       {/* Display wishlist */}

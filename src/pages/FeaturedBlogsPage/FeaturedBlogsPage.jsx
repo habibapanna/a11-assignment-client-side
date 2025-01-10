@@ -8,10 +8,11 @@ const FeaturedBlogsPage = () => {
   const [loading, setLoading] = useState(true);
 
   // Fetch top 10 featured blogs
+  // https://blog-website-server-hazel.vercel.app/featured-blogs
   useEffect(() => {
     const fetchFeaturedBlogs = async () => {
       try {
-        const response = await axios.get("https://blog-website-server-hazel.vercel.app/featured-blogs");
+        const response = await axios.get("http://localhost:5000/featured-blogs");
         setFeaturedBlogs(response.data);
       } catch (error) {
         console.error("Error fetching featured blogs:", error);

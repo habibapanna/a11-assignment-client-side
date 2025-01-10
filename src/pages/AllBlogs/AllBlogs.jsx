@@ -13,10 +13,11 @@ const AllBlogsPage = () => {
   const { userId, loading } = useContext(AuthContext); // Get userId from AuthContext
 
   // Fetch blogs from the backend
+  // https://blog-website-server-hazel.vercel.app/newBlogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("https://blog-website-server-hazel.vercel.app/newBlogs");
+        const response = await axios.get("http://localhost:5000/newBlogs");
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -87,40 +88,42 @@ const AllBlogsPage = () => {
       </div>
 
       {/* Blog Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredBlogs.map((blog, index) => (
-          <motion.div
-            key={blog._id}
-            className="border rounded-md p-4 shadow-md flex flex-col justify-between"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <img
-              src={blog.imageUrl}
-              alt={blog.title}
-              className="w-full h-40 object-cover rounded-md mb-4"
-            />
-            <h3 className="text-lg font-semibold">{blog.title}</h3>
-            <p className="text-sm text-gray-600">{blog.shortDescription}</p>
-            <p className="text-xs text-blue-600 mt-2">{blog.category}</p>
-            <div className="mt-4 flex gap-2">
-              <button
-                onClick={() => handleAddToWishlist(blog)}
-                className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600"
-              >
-                Add to Wishlist
-              </button>
-              <button
-                onClick={() => navigate(`/blog-details/${blog._id}`)} // Pass the blog ID to the route
-                className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
-              >
-                Details
-              </button>
-            </div>
-          </motion.div>
-        ))}
+      {/* Blog Cards */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {filteredBlogs.map((blog, index) => (
+    <motion.div
+      key={blog._id}
+      className="border rounded-md p-4 shadow-md flex flex-col justify-between"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <img
+        src={blog.imageUrl}
+        alt={blog.title}
+        className="w-full h-40 object-cover rounded-md mb-4"
+      />
+      <h3 className="text-lg font-semibold">{blog.title}</h3>
+      <p className="text-sm text-gray-600">{blog.shortDescription}</p>
+      <p className="text-xs text-blue-600 mt-2">{blog.category}</p>
+      <div className="mt-4 flex gap-2">
+        <button
+          onClick={() => handleAddToWishlist(blog)}
+          className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600"
+        >
+          Add to Wishlist
+        </button>
+        <button
+          onClick={() => navigate(`/blog-details/${blog._id}`)} // Pass the blog ID to the route
+          className="flex-1 bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600"
+        >
+          Details
+        </button>
       </div>
+    </motion.div>
+  ))}
+</div>
+
 
       {/* Toast Notifications */}
       <ToastContainer position="top-center" autoClose={3000} />

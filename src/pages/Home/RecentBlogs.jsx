@@ -7,10 +7,10 @@ const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
   const { userId, loading } = useContext(AuthContext);
-
+// https://blog-website-server-hazel.vercel.app/newBlogs
   useEffect(() => {
     // Fetch the latest blogs from the backend
-    fetch("https://blog-website-server-hazel.vercel.app/newBlogs")
+    fetch("http://localhost:5000/newBlogs")
       .then((res) => res.json())
       .then((data) => {
         // Assuming blogs have an `addedTime` field in ISO format
@@ -21,14 +21,14 @@ const RecentBlogs = () => {
       })
       .catch((error) => console.error("Error fetching recent blogs:", error));
   }, []);
-
+// https://blog-website-server-hazel.vercel.app/wishList
   const handleAddToWishlist = async (blog) => {
     if (!userId) {
       console.error("Please log in to add to wishlist");
       return;
     }
     try {
-      const response = await fetch("https://blog-website-server-hazel.vercel.app/wishList", {
+      const response = await fetch("http://localhost:5000/wishList", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const RecentBlogs = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center text-lime-600">
+      <h2 className="text-4xl font-bold mb-6 text-center text-orange-500">
         <Typewriter
           words={["Recent Blogs"]}
           loop={false}

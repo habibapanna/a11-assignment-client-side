@@ -25,7 +25,7 @@ const BlogDetailsPage = () => {
           setIsOwner(true);
         }
 
-        const commentsResponse = await axios.get(`https://blog-website-server-hazel.vercel.app/comments`);
+        const commentsResponse = await axios.get(`http://localhost:5000/comments`);
         setComments(commentsResponse.data);
       } catch (error) {
         console.error("Error fetching blog details or comments:", error);
@@ -48,7 +48,7 @@ const BlogDetailsPage = () => {
     }
 
     try {
-      const response = await axios.post("https://blog-website-server-hazel.vercel.app/comments", {
+      const response = await axios.post("http://localhost:5000/comments", {
         blogId,
         userId,
         userName: userName, // Using the user's name from AuthContext

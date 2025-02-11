@@ -65,7 +65,7 @@ const WishListPage = () => {
 
   return (
     <div className="container min-h-screen mx-auto p-6">
-      <h2 className="text-3xl text-orange-500 font-bold text-center mb-6">Your Wishlist</h2>
+      <h2 className="text-3xl text-cyan-500 font-bold text-center mb-6">Your Wishlist</h2>
 
       {/* Display wishlist */}
       {wishList.length === 0 ? (

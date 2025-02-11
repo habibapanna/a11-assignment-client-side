@@ -61,8 +61,8 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="text-lime-300 font-bold btn btn-ghost text-2xl">
-            <img className="w-10 rounded-full" src="https://i.ibb.co.com/3s1r4pc/download-13.jpg" alt="" />
+          <a className="text-white font-bold btn btn-ghost text-2xl">
+            <img className="w-10 rounded-full" src="https://i.postimg.cc/JhHjcgHT/blogger-3.png" alt="" />
             Blog
           </a>
         </div>

@@ -69,7 +69,7 @@ const FeaturedBlogsPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
+      <h2 className="text-3xl font-bold text-purple-500 text-center mb-6">
         Featured Blogs
       </h2>
 

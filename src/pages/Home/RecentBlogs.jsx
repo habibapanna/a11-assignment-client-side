@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
-import AnimatedSection from "../AnimatedSection/AnimatedSection";
 
 const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -57,10 +56,16 @@ const RecentBlogs = () => {
 
   return (
     <div className="p-6">
-      <AnimatedSection>
-      <h2 className="text-2xl font-bold">Recent Blogs</h2>
-      </AnimatedSection>
-      
+      <h2 className="text-4xl font-bold mb-6 text-center text-orange-500">
+        <Typewriter
+          words={["Recent Blogs"]}
+          loop={false}
+          cursor
+          cursorStyle="_"
+          typeSpeed={70}
+          deleteSpeed={50}
+        />
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
           <div

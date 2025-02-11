@@ -86,8 +86,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link className="hover:underline text-orange-500 btn" to="/register">Register</Link>
-              <Link className="btn bg-lime-500 ml-5 border-none text-white" to="/login">Login</Link>
+              <Link className="text-orange-500 btn btn-sm bg-white hover:bg-lime-200" to="/register">Register</Link>
+              <Link className="btn btn-sm hover:bg-lime-200 border-none text-orange-500 bg-white" to="/login">Login</Link>
             </>
           )}
         </div>

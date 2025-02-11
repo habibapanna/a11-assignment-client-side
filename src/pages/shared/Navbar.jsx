@@ -82,7 +82,7 @@ const Navbar = () => {
                 />
                 <span className="font-semibold">{user.displayName || "User"}</span>
               </div>
-              <button onClick={handleLogout} className="btn border-none">Logout</button>
+              <button onClick={handleLogout} className="btn btn-sm bg-white hover:bg-lime-200 border-none">Logout</button>
             </>
           ) : (
             <>

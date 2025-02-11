@@ -17,7 +17,7 @@ const BlogDetailsPage = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const blogResponse = await axios.get(`http://localhost:5000/blog-details/${blogId}`);
+        const blogResponse = await axios.get(`https://blog-website-server-hazel.vercel.app/blog-details/${blogId}`);
         setBlog(blogResponse.data);
 
         // Check if the current user is the blog owner
@@ -25,7 +25,7 @@ const BlogDetailsPage = () => {
           setIsOwner(true);
         }
 
-        const commentsResponse = await axios.get(`http://localhost:5000/comments`);
+        const commentsResponse = await axios.get(`https://blog-website-server-hazel.vercel.app/comments`);
         setComments(commentsResponse.data);
       } catch (error) {
         console.error("Error fetching blog details or comments:", error);
@@ -48,7 +48,7 @@ const BlogDetailsPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/comments", {
+      const response = await axios.post("https://blog-website-server-hazel.vercel.app/comments", {
         blogId,
         userId,
         userName: userName, // Using the user's name from AuthContext

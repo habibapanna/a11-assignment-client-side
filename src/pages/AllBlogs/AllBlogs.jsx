@@ -13,11 +13,11 @@ const AllBlogsPage = () => {
   const { userId, loading } = useContext(AuthContext); // Get userId from AuthContext
 
   // Fetch blogs from the backend
-  // https://blog-website-server-hazel.vercel.app/newBlogs
+  // 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/newBlogs");
+        const response = await axios.get("https://blog-website-server-hazel.vercel.app/newBlogs");
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);

@@ -32,7 +32,7 @@ const AddBlogPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/newBlogs', {
+      const response = await fetch('https://blog-website-server-hazel.vercel.app/newBlogs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

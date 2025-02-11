@@ -7,10 +7,10 @@ const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
   const { userId, loading } = useContext(AuthContext);
-// https://blog-website-server-hazel.vercel.app/newBlogs
+// 
   useEffect(() => {
     // Fetch the latest blogs from the backend
-    fetch("http://localhost:5000/newBlogs")
+    fetch("https://blog-website-server-hazel.vercel.app/newBlogs")
       .then((res) => res.json())
       .then((data) => {
         // Assuming blogs have an `addedTime` field in ISO format
@@ -21,14 +21,14 @@ const RecentBlogs = () => {
       })
       .catch((error) => console.error("Error fetching recent blogs:", error));
   }, []);
-// https://blog-website-server-hazel.vercel.app/wishList
+// 
   const handleAddToWishlist = async (blog) => {
     if (!userId) {
       console.error("Please log in to add to wishlist");
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/wishList", {
+      const response = await fetch("https://blog-website-server-hazel.vercel.app/wishList", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

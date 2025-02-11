@@ -15,11 +15,11 @@ const WishListPage = () => {
     if (!userId) {
       navigate("/login"); // Redirect to login if the user is not logged in
     }
-// https://blog-website-server-hazel.vercel.app/wishList/${userId}
+// 
     const fetchWishList = async () => {
       try {
         // Fetch wishlist items for the logged-in user
-        const response = await axios.get(`http://localhost:5000/wishList/${userId}`);
+        const response = await axios.get(`https://blog-website-server-hazel.vercel.app/wishList/${userId}`);
         setWishList(response.data); // Set fetched wishlist items
       } catch (error) {
         console.error("Error fetching wishlist:", error);
@@ -31,10 +31,10 @@ const WishListPage = () => {
       fetchWishList();
     }
   }, [userId, navigate]);
-// https://blog-website-server-hazel.vercel.app/wishList/${id}
+// 
   // Remove item from wishlist
   const handleRemoveFromWishlist = (id) => {
-    fetch(`http://localhost:5000/wishList/${id}`, {
+    fetch(`https://blog-website-server-hazel.vercel.app/wishList/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
